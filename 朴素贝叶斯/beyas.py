@@ -33,39 +33,44 @@ class Bayes:
         pass
     
     def fit(self, dataset, labels):
-        labels_length, features = len(labels), dataset.shape[1]
-        datasets = np.hstack((dataset, labels.reshape(labels_length, 1)))
+        labels_count, feature_count = len(labels), dataset.shape[1]
+        datasets = np.hstack((dataset, labels.reshape((labels_count, 1))))
+        p_labels, p_conditions = {}, {}
+        # 类别数
+        labels_type_count = len(set(labels))
         
-        p_labels = {}
-        p_conditions = {}
-        for label in set(labels):
-            label_length = labels[labels == label].shape[0]
-            p_labels[label] = label_length / labels_length
+        for label in set(labels):            
             dataset_label = datasets[datasets[:, 3] == label]
+            dataset_label_length = dataset_label.shape[0]
+            # 计算先验概率
+            p_label = (dataset_label_length + 1) / (labels_count + labels_type_count)
+            p_labels[label] = p_label
             p_conditions[label] = {}
-            condition_label = p_conditions[label]
-            for feature in range(features):
-                condition_label[feature] = {}
-                condition_feature = condition_label[feature]
-                for feature_value in set(dataset[:, feature]):
-                    condition_feature[feature_value] = dataset_label[dataset_label[:, feature] == feature_value].shape[0] / label_length        
-        self.p_labels = p_labels
-        self.p_conditions = p_conditions
+            
+            # 计算条件概率
+            for feature in range(feature_count):
+                p_conditions[label][feature] = {}
+                dataset_label_feature = dataset_label[:, feature]
+                # 当前特征的取值数
+                feature_value_count = len(set(dataset_label_feature))
+                for feature_value in set(dataset_label_feature):
+                    p_conditions[label][feature][feature_value] = (dataset_label_feature[dataset_label_feature==feature_value].shape[0] + 1) / (dataset_label_length + feature_value_count)
+        self.p_labels_ = p_labels
+        self.p_conditions_ = p_conditions
     
     def predict(self, dataset):
         result = []
+        
         for data in dataset:
             p = []
-            for label in p_labels:
-                p_label = self.p_labels[label]
-                condition_label = self.p_conditions[label]
+            for label in set(self.p_labels_):
+                p_label = np.log(self.p_labels_[label])
+                p_condition = 0
                 feature_index = 0
-                p_condition = 1
                 for feature_value in data:
-                    p_condition *= condition_label[feature_index][feature_value]
+                    p_condition += np.log(self.p_conditions_[label][feature_index][feature_value])
                     feature_index += 1
-                p.append(p_label * p_condition)
-            p = np.array(p)
+                p.append(p_label + p_condition)
             result.append(np.argmax(p))
         return result
 
