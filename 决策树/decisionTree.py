@@ -41,6 +41,14 @@ class DecisionTreeClassifier:
             p_label = dataset[dataset[:, -1] == label].shape[0] / length
             shannon_sum += -p_label * np.log(p_label)
         return shannon_sum
+
+    def _cal_gini(self, dataset):
+        labels, length = set(dataset[:, -1]), dataset.shape[0]
+        gini = 1
+        for label in labels:
+            p_label = dataset[dataset[:, -1] == label].shape[0] / length
+            gini -= p_label ** 2
+        return gini
     
     def _split_dataset(self, dataset, feature, feature_value):
         split_data = dataset[dataset[:, feature] == feature_value]
@@ -49,22 +57,38 @@ class DecisionTreeClassifier:
     def _choose_best_feature(self, dataset):
         length = dataset.shape[0]
         features = dataset.shape[1] - 1
-        base_shannon = self._cal_shannon_entropy(dataset)
-        split_shannon = []
-        for feature in range(features):
-            feature_values = set(dataset[:, feature])
-            shannon = 0
-            ratio = 0
-            for feature_value in feature_values:
-                dataset_feature = self._split_dataset(dataset, feature, feature_value)
-                dataset_feature_p = (dataset_feature.shape[0] / length)
-                shannon += dataset_feature_p * self._cal_shannon_entropy(dataset_feature)
-                ratio += -dataset_feature_p * np.log(dataset_feature_p)
-            if self.feature_select == 'gain':
-                split_shannon.append(base_shannon - shannon)
-            elif self.feature_select == 'gain_ratio':
-                split_shannon.append((base_shannon - shannon) / ratio)
-        best_feature = np.argmax(split_shannon)
+        # gini 系数
+        if self.feature_select == 'gini':
+            gini_feature = []
+            for feature in range(features):
+                feature_values = set(dataset[:, feature])
+                gini_index = 0
+                for feature_value in feature_values:
+                    dataset_feature = self._split_dataset(dataset, feature, feature_value)
+                    dataset_feature_p = (dataset_feature.shape[0] / length)
+                    gini_index += dataset_feature_p * self._cal_gini(dataset_feature)
+                gini_feature.append(gini_index)
+            print(gini_feature)            
+            best_feature = np.argmin(gini_feature)
+            print(best_feature)
+        # 信息熵
+        else:
+            base_shannon = self._cal_shannon_entropy(dataset)
+            split_shannon = []
+            for feature in range(features):
+                feature_values = set(dataset[:, feature])
+                shannon = 0
+                ratio = 0
+                for feature_value in feature_values:
+                    dataset_feature = self._split_dataset(dataset, feature, feature_value)
+                    dataset_feature_p = (dataset_feature.shape[0] / length)
+                    shannon += dataset_feature_p * self._cal_shannon_entropy(dataset_feature)
+                    ratio += -dataset_feature_p * np.log(dataset_feature_p)
+                if self.feature_select == 'gain':
+                    split_shannon.append(base_shannon - shannon)
+                elif self.feature_select == 'gain_ratio':
+                    split_shannon.append((base_shannon - shannon) / ratio)
+            best_feature = np.argmax(split_shannon)
         return best_feature
     
     def _vote(self, dataset):
