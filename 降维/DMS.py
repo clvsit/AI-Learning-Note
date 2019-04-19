@@ -40,7 +40,7 @@ class MDS:
         select_feature_values = []
         for i in range(len(feature_values) - 1, -1, -1):
             # print(np.round(feature_values[i]))
-            if np.round(feature_values[i]) > 0:
+            if np.round(feature_values[i]) != 0:
                 select_feature_values.append(feature_values[i])
             else:
                 feature_vectors = np.delete(feature_vectors, i, axis=1)
