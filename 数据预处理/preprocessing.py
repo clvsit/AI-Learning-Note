@@ -4,6 +4,9 @@ import numpy as np
 dataset = np.array([
     ['A', ''], ['B', '香蕉'], ['AB', '苹果'], ['O', '西瓜']
 ])
+dataset2 = np.array([
+    [2, 1], [3, 2], [1, 4], [5, 3], [3, 5]
+])
 
 
 class Preprocessing:
@@ -64,6 +67,16 @@ class Preprocessing:
             return self._one_hot_encoding(dataset)
         else:
             return self._binary_encoding(dataset)
+
+    def min_max_scaling(self, dataset):
+        dataset_min, dataset_max = np.min(dataset, axis=0), np.max(dataset, axis=0)
+        dataset_range = dataset_max - dataset_min
+        return (dataset - dataset_min) / dataset_range
+    
+    def standard_scaling(self, dataset):
+        dataset_mean = np.mean(dataset, axis=0)
+        dataset_var = np.sum((dataset - np.mean(dataset, axis=0))**2 / len(dataset), axis=0)**0.5
+        return (dataset - dataset_mean) / dataset_var
 
 
 p_test = Preprocessing()
