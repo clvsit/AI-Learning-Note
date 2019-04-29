@@ -131,6 +131,5 @@ ax.set_title('exp2.txt dataset')
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 plt.show()
-
 model = CART(ops=(1, 10))
 model.create_tree(my_dat)
