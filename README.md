@@ -8,8 +8,9 @@
 - [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python)
 - [PegasusWang/python_data_structures_and_algorithms](https://github.com/PegasusWang/python_data_structures_and_algorithms)
 
-## 数据分析
+## 数据分析与可视化
 - [apachecn/pyda-2e-zh](https://github.com/apachecn/pyda-2e-zh)
+- [qiwsir/data_visualization](https://github.com/qiwsir/data_visualization)
 
 ## 机器学习
 - [apachecn/fe4ml-zh](https://github.com/apachecn/fe4ml-zh) 面向机器学习的特征工程；
@@ -37,3 +38,4 @@
 - [formulahendry/955.WLB](https://github.com/formulahendry/955.WLB)
 - [mkdocs/mkdocs](https://github.com/mkdocs/mkdocs)
 - [appbaseio/dejavu](https://github.com/appbaseio/dejavu)
+- [Ice-Hazymoon/MikuTools](https://github.com/Ice-Hazymoon/MikuTools)
