@@ -16,6 +16,9 @@
 - [apachecn/fe4ml-zh](https://github.com/apachecn/fe4ml-zh) 面向机器学习的特征工程；
 - [Avik-Jain/100-Days-Of-ML-Code](https://github.com/Avik-Jain/100-Days-Of-ML-Code)
 
+## 深度学习
+- [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io)
+
 ## NLP
 - [hankcs/HanLP](https://github.com/hankcs/HanLP)
 - [isnowfy/snownlp](https://github.com/isnowfy/snownlp)
@@ -23,11 +26,13 @@
 - [stanfordnlp/stanfordnlp](https://github.com/stanfordnlp/stanfordnlp)
 - [lpty/nlp_base](https://github.com/lpty/nlp_base)
 - [graykode/nlp-tutorial](https://github.com/graykode/nlp-tutorial)
+- [https://fasttext.cc/docs/en/unsupervised-tutorial.html](https://github.com/facebookresearch/fastText)
 
 ## 数据集
 - [qiwsir/DataSet](https://github.com/qiwsir/DataSet)
 
 ## 应用
+- [CheckChe0803/flink-recommandSystem-demo](https://github.com/CheckChe0803/flink-recommandSystem-demo) 基于 Flink 实现的商品实时推荐系统。
 
 ### 聊天机器人
 - [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat) 
@@ -39,3 +44,4 @@
 - [mkdocs/mkdocs](https://github.com/mkdocs/mkdocs)
 - [appbaseio/dejavu](https://github.com/appbaseio/dejavu)
 - [Ice-Hazymoon/MikuTools](https://github.com/Ice-Hazymoon/MikuTools)
+- [ruanyf/free-books](https://github.com/ruanyf/free-books) 互联网上的免费书籍；
