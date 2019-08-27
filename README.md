@@ -8,6 +8,9 @@
 - [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python)
 - [PegasusWang/python_data_structures_and_algorithms](https://github.com/PegasusWang/python_data_structures_and_algorithms)
 
+### Python 包
+- [tqdm/tqdm](https://github.com/tqdm/tqdm) A Fast, Extensible Progress Bar for Python and CLI
+
 ## 数据分析与可视化
 - [apachecn/pyda-2e-zh](https://github.com/apachecn/pyda-2e-zh)
 - [qiwsir/data_visualization](https://github.com/qiwsir/data_visualization)
