@@ -41,6 +41,10 @@
 - [littlecodersh/ItChat](https://github.com/littlecodersh/ItChat) 
 - [qhduan/Seq2Seq_Chatbot_QA](https://github.com/qhduan/Seq2Seq_Chatbot_QA) 使用TensorFlow实现的Sequence to Sequence的聊天机器人模型；
 - [warmheartli/ChatBotCourse](https://github.com/warmheartli/ChatBotCourse) 自己动手做聊天机器人教程；
+- [Doragd/Chinese-Chatbot-PyTorch-Implementation](https://github.com/Doragd/Chinese-Chatbot-PyTorch-Implementation) 一个利用有趣中文语料库 qingyun 训练出来的中文聊天机器人；
+
+## 工具
+- [realdennis/md2pdf](https://github.com/realdennis/md2pdf) Offline markdown to pdf；
 
 ## 其他
 - [formulahendry/955.WLB](https://github.com/formulahendry/955.WLB)
