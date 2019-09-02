@@ -30,6 +30,7 @@
 - [lpty/nlp_base](https://github.com/lpty/nlp_base)
 - [graykode/nlp-tutorial](https://github.com/graykode/nlp-tutorial)
 - [https://fasttext.cc/docs/en/unsupervised-tutorial.html](https://github.com/facebookresearch/fastText)
+- [huyingxi/Synonyms](https://github.com/huyingxi/Synonyms) 中文近义词工具包；
 
 ## 数据集
 - [qiwsir/DataSet](https://github.com/qiwsir/DataSet)
