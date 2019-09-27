@@ -40,6 +40,10 @@
 - [huyingxi/Synonyms](https://github.com/huyingxi/Synonyms) 中文近义词工具包；
 - [zlsdu/Word-Embedding](https://github.com/zlsdu/Word-Embedding) Word2Vec, Fasttext, Glove, ELMo, Bert, Flair pre-train Word Embedding；
 
+【NER】：
+
+- [Determined22/zh-NER-TF](https://github.com/Determined22/zh-NER-TF)
+
 ### 工具
 
 - [hankcs/HanLP](https://github.com/hankcs/HanLP)
@@ -47,6 +51,12 @@
 - [fxsjy/jieba](https://github.com/fxsjy/jieba)
 
 ## 数据集
+
+【自然语言处理】：
+
+- [lnsaneLife/ChineseNLPCorpus](https://github.com/InsaneLife/ChineseNLPCorpus)
+
+【结构化数据】：
 
 - [qiwsir/DataSet](https://github.com/qiwsir/DataSet)
 
