@@ -77,9 +77,9 @@ POST /website/user/
 
 ```
 {
-    "`_index": "website",
-    "`_type":  "user",
-    "`_id":    "wM0OSFhDQXGZAWDf0-drSA",
+    "_index":   "website",
+    "_type":    "user",
+    "_id":      "wM0OSFhDQXGZAWDf0-drSA",
     "_version": 1,
     "created":  true
 }
@@ -90,6 +90,59 @@ POST /website/user/
 - `POST`：把文档存储在这个地址下。
 
 【注意】：自生成 ID 是由 22 个字母组成的，被称为 [UUIDs](http://baike.baidu.com/view/1052579.htm?fr=aladdin)。
+
+## 搜索文档
+要从 ES 中获取文档，需要先知道文档在 ES 中的位置。根据先前所学的知识，`_index`、`_type` 和 `_id` 唯一标识文档，因此，我们可通过这三者去获取文档。
+
+【示例】：
+- 请求内容
+
+```
+GEt /website/user/123?pretty
+```
+- 返回内容
+
+```
+{
+    "_index":   "website",
+    "_type":    "user",
+    "_id":      "wM0OSFhDQXGZAWDf0-drSA",
+    "_version": 1,
+    "found":    true
+    "_source": {
+        "userId": 123,
+        "userName": "XXX"
+    }
+}
+```
+
+`_source` 表示存储文档时传入的内容，即上一节**文档存储**中插入的内容。
+
+【pretty】：在任意查询字符串中添加 `pretty` 参数，ES 可以执行**优美打印**，得到更加易于识别的 JSON 结果。`_source` 字段不会执行优美打印，只保留录入文档时的样子。
+
+【found】：GET 请求的返回结果中包含 `found` 字段，表示文档是否有被检索得到。如果我们请求了一个不存在的文档，`found` 值变为 false，并且 HTTP 返回码也会变为 "404 Not Found"。
+
+通常，`GET` 请求会将整个文档一并放入 `_source` 字段中。如果此时我们只需要特定字段，可以使用 `_source` 指定需要返回的字段。
+
+【示例】：
+```
+GET /website/user/123?_source=userId,userName
+```
+
+多个字段可以使用逗号分隔。
+
+如果只想得到 `_source` 字段而不想返回 `_index` 等其他元数据，可以这样请求：
+```
+GET /website/user/123/_source
+```
+
+这样结果只返回 `_source` 字段中的内容。
+```
+{
+    "userId": 123,
+    "userName": "XXX"
+}
+```
 
 ## 检查文档是否存在
 可以使用 `HEAD` 方法，通过判断返回的 HTTP 头文件来检查文档是否存在。
@@ -136,3 +189,21 @@ PUT /website/blog/123
 
 在内部，ES 已经将旧文档标记为删除，并添加了新的文档。需要注意的是，旧的文档不会立即消失，但无法访问，ES 后续会在后台清理已经删除的文件。
 
+## 创建文档
+当我们在索引一个文档时，如何确定是创建了一个新的文档，还是覆盖了一个已经存在的文档？
+
+如果不考虑覆盖的情况，最简单的方法就是使用 `POST`，让 ES 创建不同的 `_id`，不考虑覆盖直接创建文档，即使文档内容相同。如果使用文档中已有 id 信息，那么会覆盖原先的文档内容。
+
+但很多时候我们往往会有去重的任务，此时 ID 就可以帮助我们做去重任务。只有 `_index`、`_type` 和 `_id` 这三个元数据不完全相同才允许插入。实现这个目的有两种方法：
+- 在查询中添加 `op_type` 参数：
+
+```
+PUT /website/user/123?op_type=create
+```
+- 在请求最后添加 `/create`：
+
+```
+PUT /website/user/123/_create
+```
+
+如果成功创建了新的文档，ES 将会返回常见的元数据以及 `201 Created` HTTP 返回码。如果存在同名文档，ES 将会返回 `409 Conflict` 的 HTTP 返回码。
